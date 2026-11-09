@@ -1,5 +1,6 @@
 import json
 import platform
+import statistics   # NEW (change 1)
 import subprocess
 import sys
 import time
@@ -16,6 +17,7 @@ for i in range(runs):
 
 mean = sum(times) / runs
 spread = max(times) - min(times)
+stdev = statistics.stdev(times)   # NEW (change 2)
 
 result = {
     "machine": {
@@ -28,6 +30,7 @@ result = {
     "times_seconds": times,
     "mean_seconds": mean,
     "spread_seconds": spread,
+    "stdev_seconds": stdev,   # NEW (change 3)
 }
 
 with open("result.json", "w") as f:
@@ -35,4 +38,5 @@ with open("result.json", "w") as f:
 
 print("Mean:", mean)
 print("Spread:", spread)
+print("Stdev:", stdev)   # NEW (change 4)
 print("Saved to result.json")
